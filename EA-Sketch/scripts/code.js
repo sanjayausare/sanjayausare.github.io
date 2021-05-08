@@ -1,20 +1,17 @@
 const container = document.querySelector('.container');
 const changeSize = document.querySelector('#changeSize');
 const reset = document.querySelector('#reset');
-
-function CreateGrid(x=16){
-    for(let i=0;i<x*x;i++) {
+let size = 16;
+function CreateGrid(){
+    for(let i=0;i<size*size;i++) {
         const div = document.createElement('div');
         div.classList.add('div');
-        div.style.width = 575/x + "px";
-        div.style.height = 575/x + "px";
+        container.appendChild(div);
         div.addEventListener("mouseover", function(){
             div.style.backgroundColor = `hsla(${Math.random() * 360}, 100%, 50%, 1)`;
         });
-        container.appendChild(div);
     }
 }
-
 function erase() {
     /*const gridItems = document.querySelectorAll('.container > div');
     gridItems.forEach((div) => {
@@ -25,12 +22,11 @@ function erase() {
     }
     CreateGrid();
 }
-
-reset.addEventListener('click',erase);
-changeSize.addEventListener('click',function(){
+function sizeCh() {
+    size = parseInt(prompt("Enter the size of the Grid:"));
     erase();
-    size = parseInt(prompt("Enter the size of the Grid:",16));
     document.documentElement.style.setProperty('--size', size);
-    
-});
+}
+reset.addEventListener('click',erase);
+changeSize.addEventListener('click',sizeCh);
 CreateGrid();
